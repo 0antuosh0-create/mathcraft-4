@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Default LTR English font */
+  :root, html[dir="ltr"], body[dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* RTL Persian font & text rendering */
+  html[dir="rtl"], body[dir="rtl"], [dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif !important;
+    letter-spacing: 0 !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  [dir="rtl"] * {
+    letter-spacing: 0 !important;
+  }
+
+  /* Universal font inheritance for Persian */
+  [dir="rtl"] input,
+  [dir="rtl"] textarea,
+  [dir="rtl"] select,
+  [dir="rtl"] button,
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] h5,
+  [dir="rtl"] h6,
+  [dir="rtl"] p,
+  [dir="rtl"] span,
+  [dir="rtl"] div {
+    font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Monospace overrides */
+  .font-mono, [dir="rtl"] .font-mono, [dir="ltr"] .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  }
+}
+
+/* Paper Grid & Lined Backgrounds */
+.paper-grid {
+  background-image: 
+    linear-gradient(to right, rgba(203, 213, 225, 0.45) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(203, 213, 225, 0.45) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.paper-lined {
+  background-image: linear-gradient(to bottom, transparent 23px, rgba(203, 213, 225, 0.6) 24px);
+  background-size: 100% 24px;
+}
+
+.paper-dots {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.5) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Print Overrides */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10.5pt !important;
+  }
+
+  .print-hide {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .page-break {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  .keep-together {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

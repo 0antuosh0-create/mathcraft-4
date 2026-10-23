@@ -1,0 +1,5 @@
+node_modules/
+dist/
+oriented/
+*.png
+.DS_Store

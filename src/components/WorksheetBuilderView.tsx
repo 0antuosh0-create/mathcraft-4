@@ -281,79 +281,82 @@ export const WorksheetBuilderView: React.FC<WorksheetBuilderViewProps> = ({
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 space-y-4">
       {/* Studio Top Control Strip */}
-      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-3 shadow-card flex flex-wrap items-center justify-between gap-3 text-xs print-hide transition-colors">
-        {/* Left: View Switcher */}
-        <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-          <button
-            onClick={() => setActiveTab('preview')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition-all ${
-              activeTab === 'preview'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm font-bold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Eye className="w-3.5 h-3.5" />
-            <span>{t('interactiveSheet', language)}</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('editor')}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition-all ${
-              activeTab === 'editor'
-                ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm font-bold'
-                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Sliders className="w-3.5 h-3.5" />
-            <span>{t('configureItems', language)}</span>
-          </button>
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 shadow-card flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 text-xs print-hide transition-colors w-full max-w-full">
+        {/* Row 1 on mobile: View Switcher & Presets */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 flex-1 min-w-0">
+          <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg shrink-0">
+            <button
+              onClick={() => setActiveTab('preview')}
+              className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition-all ${
+                activeTab === 'preview'
+                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm font-bold'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Eye className="w-3.5 h-3.5" />
+              <span>{t('interactiveSheet', language)}</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('editor')}
+              className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition-all ${
+                activeTab === 'editor'
+                  ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm font-bold'
+                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Sliders className="w-3.5 h-3.5" />
+              <span>{t('configureItems', language)}</span>
+            </button>
+          </div>
+
+          <div className="flex items-center gap-1.5 flex-1 min-w-0">
+            <span className="font-semibold text-slate-500 dark:text-slate-400 text-[11px] shrink-0">
+              {isFa ? 'نمونه:' : 'Presets:'}
+            </span>
+            <select
+              onChange={(e) => handleLoadPreset(e.target.value)}
+              defaultValue=""
+              className="bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg px-2 py-1.5 focus:outline-none cursor-pointer w-full min-w-0 truncate"
+            >
+              <option value="" disabled>{isFa ? 'انتخاب کاربرگ...' : 'Load preset...'}</option>
+              {presetsList.map((pw) => (
+                <option key={pw.id} value={pw.id}>{pw.title}</option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        {/* Center: Presets */}
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-500 dark:text-slate-400 text-[11px]">
-            {isFa ? 'کاربرگ‌های نمونه:' : 'Presets:'}
-          </span>
-          <select
-            onChange={(e) => handleLoadPreset(e.target.value)}
-            defaultValue=""
-            className="bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-medium rounded-lg px-2.5 py-1 focus:outline-none cursor-pointer"
-          >
-            <option value="" disabled>{isFa ? 'انتخاب کاربرگ آماده...' : 'Load curriculum preset...'}</option>
-            {presetsList.map((pw) => (
-              <option key={pw.id} value={pw.id}>{pw.title}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Right: Storage & Print Action */}
-        <div className="flex items-center gap-2">
+        {/* Row 2 on mobile: Actions */}
+        <div className="flex items-center gap-1.5 justify-between sm:justify-end">
           <button
             onClick={() => {
               sound.playClick();
               setShowQuizBuilderModal(true);
             }}
-            className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all flex items-center gap-1.5 shadow-sm"
+            className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-sm"
           >
             <ListChecks className="w-3.5 h-3.5" />
-            <span>{isFa ? 'ساخت کوییز انتخابی' : 'Build Custom Quiz'}</span>
+            <span>{isFa ? 'ساخت کوییز' : 'Build Quiz'}</span>
           </button>
+
           <button
             onClick={handleSaveToLocalStorage}
-            title={isFa ? 'ذخیره در مرورگر' : 'Save to local storage'}
-            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            title={isFa ? 'ذخیره در مرورگر' : 'Save'}
+            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             <Bookmark className="w-4 h-4" />
           </button>
           <button
             onClick={handleExportJson}
-            title={isFa ? 'دانلود فایل JSON' : 'Export JSON definition'}
-            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+            title="JSON"
+            className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
           >
             <Download className="w-4 h-4" />
           </button>
+
           <button
             onClick={handlePrint}
-            className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 shadow-sm hover:opacity-90"
+            className="flex-1 sm:flex-none bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold px-3.5 py-1.5 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-sm"
           >
             <Printer className="w-3.5 h-3.5" />
             <span>{t('printSavePdf', language)}</span>
@@ -841,12 +844,9 @@ export const WorksheetBuilderView: React.FC<WorksheetBuilderViewProps> = ({
           </div>
 
           {/* Studio Drafting Desk (Center/Right Canvas) */}
-          <div className={`lg:col-span-8 bg-slate-900 dark:bg-slate-950 p-2 sm:p-8 rounded-2xl overflow-x-auto shadow-inner border border-slate-800 flex flex-col items-center min-h-[500px] sm:min-h-[850px] ${mobileStudioView === 'paper' ? 'flex' : 'hidden lg:flex'}`}>
-            <div className="lg:hidden text-[10px] font-bold text-slate-300 dark:text-slate-400 mb-2 flex items-center gap-1">
-              <span>↔</span>
-              <span>{isFa ? 'برای مشاهده کامل برگه به چپ و راست بکشید' : 'Swipe horizontally to inspect full sheet'}</span>
-            </div>
-            <div className="bg-white shadow-paper border border-slate-300/80 rounded w-full max-w-[780px] transition-all">
+          {/* Studio Drafting Desk (Center/Right Canvas - fits 100% on phones without cut-off) */}
+          <div className={`lg:col-span-8 bg-slate-900 dark:bg-slate-950 p-1 sm:p-6 rounded-2xl shadow-inner border border-slate-800 flex flex-col items-center w-full max-w-full overflow-hidden ${mobileStudioView === 'paper' ? 'flex' : 'hidden lg:flex'}`}>
+            <div className="w-full max-w-full sm:max-w-[780px] bg-white shadow-paper border border-slate-300/80 rounded-xl transition-all overflow-hidden">
               <WorksheetPrintLayout
                 worksheet={customWorksheet}
                 language={language}

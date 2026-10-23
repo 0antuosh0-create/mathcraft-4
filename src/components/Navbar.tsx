@@ -89,27 +89,27 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       <header className="sticky top-0 z-40 h-14 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors print-hide">
-      <div className="max-w-7xl mx-auto h-full px-3 sm:px-5 flex items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto h-full px-2 sm:px-5 flex items-center justify-between gap-1.5 sm:gap-3">
         {/* Start: Brand & Topic Dropdown */}
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-mono font-black text-xs shadow-sm">
+        <div className="flex items-center gap-1.5 sm:gap-3 min-w-0">
+          <div className="flex items-center gap-1.5 shrink-0">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 flex items-center justify-center font-mono font-black text-xs shadow-sm">
               M4
             </div>
-            <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white hidden sm:inline">
+            <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white hidden md:inline">
               {isFa ? 'ریاضی‌یار ۴' : 'MathCraft 4'}
             </span>
           </div>
 
-          {/* Compact Topic Switcher */}
-          <div className="relative">
+          {/* Compact Responsive Topic Switcher */}
+          <div className="relative min-w-0">
             <select
               value={activeUnitId}
               onChange={(e) => {
                 sound.playClick();
                 onUnitChange(e.target.value);
               }}
-              className="bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 text-xs font-semibold rounded-lg px-2.5 py-1.5 pe-7 focus:outline-none cursor-pointer transition-colors appearance-none"
+              className="bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 text-[11px] sm:text-xs font-semibold rounded-lg px-2 py-1.5 pe-6 focus:outline-none cursor-pointer transition-colors appearance-none w-auto max-w-[135px] sm:max-w-[220px] truncate"
             >
               {units.map((u) => (
                 <option key={u.id} value={u.id}>
@@ -117,7 +117,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </option>
               ))}
             </select>
-            <ChevronDown className={`w-3.5 h-3.5 absolute top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none ${isFa ? 'start-2' : 'end-2'}`} />
+            <ChevronDown className={`w-3 h-3 absolute top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none ${isFa ? 'start-1.5' : 'end-1.5'}`} />
           </div>
         </div>
 

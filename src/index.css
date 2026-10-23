@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  /* Default LTR English font */
-  :root, html[dir="ltr"], body[dir="ltr"] {
+  /* Default LTR English font & mobile overflow protection */
+  :root, html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  html[dir="ltr"], body[dir="ltr"] {
     direction: ltr;
     text-align: left;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;

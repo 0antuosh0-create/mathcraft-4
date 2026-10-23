@@ -260,19 +260,19 @@ export const WorksheetPrintLayout: React.FC<WorksheetPrintLayoutProps> = ({
 
               {/* 2. Worksheet Title */}
               {vis.showTitle && (
-                <div className="group relative flex items-center gap-1.5">
+                <div className="group relative flex items-center gap-1.5 flex-1 min-w-0">
                   {isEditable ? (
-                    <input
-                      type="text"
+                    <textarea
+                      rows={worksheet.title.length > 25 ? 2 : 1}
                       value={worksheet.title}
                       onChange={(e) => onUpdateTitle?.(e.target.value)}
-                      className="text-xl font-black text-slate-900 tracking-tight bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 -mx-1 w-full"
+                      className="text-base sm:text-xl font-black text-slate-900 tracking-tight bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 -mx-1 w-full resize-none leading-tight"
                     />
                   ) : (
-                    <h1 className="text-xl font-black text-slate-900 tracking-tight">{worksheet.title}</h1>
+                    <h1 className="text-base sm:text-xl font-black text-slate-900 tracking-tight leading-tight">{worksheet.title}</h1>
                   )}
                   {isEditable && onToggleVisibility && (
-                    <button onClick={() => onToggleVisibility('showTitle')} title="Remove Title" className="opacity-0 group-hover:opacity-100 text-rose-500 print-hide"><X className="w-3 h-3" /></button>
+                    <button onClick={() => onToggleVisibility('showTitle')} title="Remove Title" className="opacity-0 group-hover:opacity-100 text-rose-500 print-hide shrink-0"><X className="w-3 h-3" /></button>
                   )}
                 </div>
               )}
@@ -281,26 +281,26 @@ export const WorksheetPrintLayout: React.FC<WorksheetPrintLayoutProps> = ({
               {vis.showSubtitle && (
                 <div className="group relative flex items-center gap-1 text-xs font-semibold text-slate-700">
                   {isEditable ? (
-                    <div className="flex items-center gap-1 w-full">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 w-full text-xs font-semibold text-slate-700 min-w-0">
                       <input
                         type="text"
                         value={worksheet.grade}
                         onChange={(e) => onUpdateGrade?.(e.target.value)}
-                        className="bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 -mx-1 text-xs font-semibold text-slate-700 w-36"
+                        className="bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 -mx-1 text-xs font-semibold text-slate-700 w-full sm:w-auto"
                       />
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <input
                         type="text"
                         value={worksheet.subject}
                         onChange={(e) => onUpdateSubject?.(e.target.value)}
-                        className="bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 -mx-1 text-xs font-semibold text-slate-700 flex-1"
+                        className="bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 -mx-1 text-xs font-semibold text-slate-700 flex-1 min-w-0"
                       />
                     </div>
                   ) : (
-                    <div>{worksheet.grade} • {worksheet.subject}</div>
+                    <div className="text-[11px] sm:text-xs leading-snug">{worksheet.grade} • {worksheet.subject}</div>
                   )}
                   {isEditable && onToggleVisibility && (
-                    <button onClick={() => onToggleVisibility('showSubtitle')} title="Remove Subtitle" className="opacity-0 group-hover:opacity-100 text-rose-500 print-hide"><X className="w-3 h-3" /></button>
+                    <button onClick={() => onToggleVisibility('showSubtitle')} title="Remove Subtitle" className="opacity-0 group-hover:opacity-100 text-rose-500 print-hide shrink-0"><X className="w-3 h-3" /></button>
                   )}
                 </div>
               )}
@@ -420,18 +420,18 @@ export const WorksheetPrintLayout: React.FC<WorksheetPrintLayoutProps> = ({
             {vis.showPeriodField && (
               <div className="group relative flex items-center gap-1">
                 {isEditable ? (
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 min-w-0">
                     <input
                       type="text"
                       value={worksheet.periodLabel ?? (isFa ? 'کلاس / نوبت:' : 'Period / Seat:')}
                       onChange={(e) => onUpdatePeriodLabel?.(e.target.value)}
-                      className="w-20 bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 text-end font-semibold text-slate-800"
+                      className="w-auto min-w-[70px] max-w-[110px] bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 text-end font-semibold text-slate-800 text-[11px]"
                     />
                     <input
                       type="text"
                       value={worksheet.periodValue ?? '_____'}
                       onChange={(e) => onUpdatePeriodValue?.(e.target.value)}
-                      className="w-14 bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 font-semibold text-slate-800"
+                      className="w-12 bg-transparent hover:bg-slate-100 border border-transparent hover:border-slate-300 rounded px-1 font-semibold text-slate-800 text-[11px]"
                     />
                   </div>
                 ) : (

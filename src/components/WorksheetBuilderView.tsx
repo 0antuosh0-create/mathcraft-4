@@ -364,8 +364,8 @@ export const WorksheetBuilderView: React.FC<WorksheetBuilderViewProps> = ({
         </div>
       </div>
 
-      {/* Mobile Studio View Switcher (Only visible on mobile screens) */}
-      <div className="lg:hidden flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 mb-3">
+      {/* Mobile Studio View Switcher (Hidden in print) */}
+      <div className="lg:hidden flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 mb-3 print-hide print:hidden">
         <button
           onClick={() => setMobileStudioView('paper')}
           className={`flex-1 py-2 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
@@ -671,7 +671,7 @@ export const WorksheetBuilderView: React.FC<WorksheetBuilderViewProps> = ({
                       }}
                       className="rounded text-blue-600"
                     />
-                    <span>{isFa ? 'کادر پاسخ' : 'Answer Box'}</span>
+                    <span>{isFa ? 'کادر نمره هر سوال' : 'Question Grade Boxes'}</span>
                   </label>
 
                   <label className="flex items-center gap-1.5 cursor-pointer text-slate-700 dark:text-slate-300">

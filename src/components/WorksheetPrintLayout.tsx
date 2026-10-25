@@ -600,12 +600,19 @@ export const WorksheetPrintLayout: React.FC<WorksheetPrintLayoutProps> = ({
                 </div>
               </div>
 
-              {/* Answer Box */}
-              {vis.showAnswerBoxes && (
-                <div className="mt-2 flex justify-end">
-                  <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                    <span>{t('answerLabel', language)}</span>
-                    <div className="w-32 sm:w-44 h-7 border-2 border-slate-800 rounded bg-white"></div>
+              {/* Question Grade / Teacher Scoring Box */}
+              {(vis.showGradeBoxes ?? vis.showAnswerBoxes) && (
+                <div className="mt-2.5 flex justify-end">
+                  <div className="border-2 border-slate-900 rounded-lg px-3 py-1 bg-slate-50 flex items-center gap-2 text-xs font-bold text-slate-900 print:bg-transparent print:border-slate-900 shadow-sm">
+                    <span className="text-[10px] text-slate-600 uppercase tracking-wider font-bold">
+                      {isFa ? 'نمره این سوال:' : 'Item Grade:'}
+                    </span>
+                    <span className="font-mono text-sm font-black">
+                      ____ / {formatDisplayDigits(item.score, language)}
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-semibold">
+                      {t('points', language)}
+                    </span>
                   </div>
                 </div>
               )}

@@ -143,6 +143,7 @@ export interface WorksheetVisibility {
   showDirections: boolean;
   showMascot: boolean;
   showAnswerBoxes: boolean;
+  showGradeBoxes?: boolean;
   showTeacherNote: boolean;
   showQuestionIcons: boolean;
   showSmileyRating: boolean;
